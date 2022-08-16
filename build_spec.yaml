@@ -29,6 +29,7 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}
       chmod +x kubectl
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
+      ./kubectl get nodes
 
     onFailure:
       - type: Command
