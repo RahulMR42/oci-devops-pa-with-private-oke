@@ -17,10 +17,10 @@ env:
     #Variable to export and use with in further stages.
 
 inputArtifacts:
-  - name: golan-cli
-    type: URL
-    url: https://go.dev/dl/go1.17.8.linux-amd64.tar.gz
-    location: ${OCI_PRIMARY_SOURCE_DIR}/gocli.tar.gz
+  - name: kubectl
+    type: GENERIC_ARTIFACT
+    artifactid: ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva
+    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
 
 
 steps:
