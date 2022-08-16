@@ -6,7 +6,6 @@ shell: bash
 env:
   # these are local variables to the build config
   variables:
-
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
   vaultVariables:
@@ -16,11 +15,11 @@ env:
   exportedVariables:
     #Variable to export and use with in further stages.
 
-inputArtifacts:
-  - name: kubectl
-    type: GENERIC_ARTIFACT
-    artifactid: "ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva"
-    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
+  inputArtifacts:
+    - name: kubectl
+      type: GENERIC_ARTIFACT
+      artifactid: "ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva"
+      location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
 
 
 steps:
