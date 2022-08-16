@@ -27,8 +27,8 @@ steps:
     name: "Setup Kubernetes Access"
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}
-      ls -ltr
       chmod +x kubectl
+      ls -ltr
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
       ./kubectl get nodes
 
