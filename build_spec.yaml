@@ -27,11 +27,10 @@ steps:
     name: "Setup Kubernetes Access"
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}
-      chmod +x kubectl
+      yum install kubectl
       ls -ltr
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
-      install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-      kubectl
+
 
     onFailure:
       - type: Command
