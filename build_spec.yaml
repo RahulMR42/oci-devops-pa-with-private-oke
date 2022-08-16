@@ -15,11 +15,14 @@ env:
   exportedVariables:
     #Variable to export and use with in further stages.
 
-#inputArtifacts:
-#  - name: kubectl
-#    type: URL
-#    url: https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl
-#    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectln
+  inputArtifacts:
+    - name: kubectl
+      type: GENERIC_ARTIFACT
+      artifactid: "ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva"
+      registryid: "ocid1.artifactrepository.oc1.us-sanjose-1.0.amaaaaaayat6pyaan2jhs6bprfub4ugqwcpsmged6xxeath5hi6qzdcn5znq"
+      path: kubectl
+      version: 1.24.0
+      location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
 
 steps:
   - type: Command
@@ -27,17 +30,9 @@ steps:
     name: "Setup Kubernetes Access"
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}
-      cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
-      [kubernetes]
-      name=Kubernetes
-      baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
-      enabled=1
-      gpgcheck=1
-      gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-      EOF
-      yum install kubectl -y
-      ls -ltr
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
+      export KUBECONFIG=./kube_config
+      ./kubectl get nodes
 
 
     onFailure:
