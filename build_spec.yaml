@@ -15,11 +15,11 @@ env:
   exportedVariables:
     #Variable to export and use with in further stages.
 
-#inputArtifacts:
-#  - name: kubectl
-#    type: URL
-#    url: https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl
-#    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
+inputArtifacts:
+  - name: kubectl
+    type: URL
+    url: https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl
+    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectln
 
 steps:
   - type: Command
@@ -27,6 +27,7 @@ steps:
     name: "Setup Kubernetes Access"
     command: |
       cd ${OCI_PRIMARY_SOURCE_DIR}
+      ls -ltr
       chmod +x kubectl
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
       ./kubectl get nodes
