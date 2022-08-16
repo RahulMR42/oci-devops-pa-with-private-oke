@@ -18,7 +18,7 @@ env:
 inputArtifacts:
   - name: kubectl
     type: GENERIC_ARTIFACT
-    artifactId: "ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva"
+    artifactId: ${OCI_ARTIFACT_OCID}
     location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
 
 
@@ -30,6 +30,7 @@ steps:
       cd ${OCI_PRIMARY_SOURCE_DIR}
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
       export KUBECONFIG=./kube_config
+      chmod +x kubectl
       ./kubectl get nodes
 
 
