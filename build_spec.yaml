@@ -15,14 +15,14 @@ env:
   exportedVariables:
     #Variable to export and use with in further stages.
 
-  inputArtifacts:
-    - name: kubectl
-      type: GENERIC_ARTIFACT
-      artifactid: "ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva"
-      registryid: "ocid1.artifactrepository.oc1.us-sanjose-1.0.amaaaaaayat6pyaan2jhs6bprfub4ugqwcpsmged6xxeath5hi6qzdcn5znq"
-      path: kubectl
-      version: 1.24.0
-      location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
+inputArtifacts:
+  - name: kubectl
+    type: GENERIC_ARTIFACT
+    artifactid: "ocid1.genericartifact.oc1.us-sanjose-1.0.amaaaaaayat6pyaa45q7pl6ewukfsb4rhbjzuqwne52xsgma6woqzzrjseva"
+    registryid: "ocid1.artifactrepository.oc1.us-sanjose-1.0.amaaaaaayat6pyaan2jhs6bprfub4ugqwcpsmged6xxeath5hi6qzdcn5znq"
+    path: kubectl
+    version: 1.24.0
+    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
 
 steps:
   - type: Command
