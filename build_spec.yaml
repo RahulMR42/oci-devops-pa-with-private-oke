@@ -39,7 +39,6 @@ steps:
       kubectl describe svc sample-svc
       echo "Delete the SVC..."
       kubectl delete -f sample_oke_svc.yaml
-      kubectl describe svc sample-svc
     onFailure:
       - type: Command
         command: |
