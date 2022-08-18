@@ -31,8 +31,14 @@ steps:
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
       export KUBECONFIG=./kube_config
       chmod +x kubectl
-      ./kubectl config view
       ./kubectl get nodes
+      echo "Applying SVC Config..."
+      kubectl apply -f sample_oke_svc.yaml
+      echo "Validate the SVC..."
+      kubectl describe svc sample-svc
+      echo "Delete the SVC..."
+      kubectl delete -f sample_oke_svc.yaml
+      kubectl describe svc sample-svc
 
 
     onFailure:
