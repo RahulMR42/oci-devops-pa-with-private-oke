@@ -13,7 +13,7 @@ env:
   # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
   exportedVariables:
-    #Variable to export and use with in further stages.
+  #Variable to export and use with in further stages.
 
 inputArtifacts:
   - name: kubectl_cli
@@ -31,7 +31,8 @@ steps:
       oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
       export KUBECONFIG=./kube_config
       chmod +x kubectl
-      ./kubectl get nodes
+      export PATH=${PATH}:${OCI_PRIMARY_SOURCE_DIR}
+      kubectl get nodes
       echo "Applying SVC Config..."
       kubectl apply -f sample_oke_svc.yaml
       echo "Validate the SVC..."
@@ -39,8 +40,6 @@ steps:
       echo "Delete the SVC..."
       kubectl delete -f sample_oke_svc.yaml
       kubectl describe svc sample-svc
-
-
     onFailure:
       - type: Command
         command: |
@@ -51,8 +50,9 @@ steps:
 
 
 #outputArtifacts:
-#  - name: sample_python_fastap_image
-#    type: DOCKER_IMAGE
+#  - name: sample
+#    type: DOCKER_IMAGE/BINARY
 #    # this location tag doesn't effect the tag used to deliver the container image
 #    # to the Container Registry
-#    location: sample_python_fastap_image:latest
+#    location:
+
