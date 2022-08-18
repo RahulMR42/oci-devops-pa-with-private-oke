@@ -18,11 +18,7 @@ env:
 inputArtifacts:
   - name: kubectl_cli
     type: URL
-    url: https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl
-    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl_cli
-  - name: kubectl
-    type: GENERIC_ARTIFACT
-    artifactId: ${OCI_ARTIFACT_OCID}
+    url: https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
     location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
 
 
